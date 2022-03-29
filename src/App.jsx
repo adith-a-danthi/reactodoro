@@ -1,7 +1,12 @@
+import { Route, Routes } from 'react-router';
+import { Home } from './views';
+
 function App() {
   return (
     <div className="App">
-      <h1>Reactodoro</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
