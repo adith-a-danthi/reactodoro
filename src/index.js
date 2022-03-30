@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { TasksProvider } from './context/tasks-context';
 
+import './styles/index.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <TasksProvider>
