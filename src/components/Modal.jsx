@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTasks } from '../context/tasks-context';
-import { actionTypes } from '../hooks/tasksReducer';
+import { actionTypes } from '../reducers/tasksReducer';
 import { v4 as uuidV4 } from 'uuid';
 
 export default function Modal({ setShowModal, task = {}, editModal }) {
@@ -31,7 +31,7 @@ export default function Modal({ setShowModal, task = {}, editModal }) {
   };
 
   return (
-    <div className="modal-window is-active">
+    <section className="modal-window is-active">
       <div className="modal ma-0 rounded-lg flat">
         {/* Header */}
         <div className="flex gap-2 justify-space-between align-items-center">
@@ -98,6 +98,6 @@ export default function Modal({ setShowModal, task = {}, editModal }) {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,5 +1,5 @@
 import { useTasks } from '../context/tasks-context';
-import { actionTypes } from '../hooks/tasksReducer';
+import { actionTypes } from '../reducers/tasksReducer';
 
 export default function TaskItem({ task, showEditModal }) {
   const { dispatchTasks } = useTasks();
