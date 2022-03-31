@@ -6,8 +6,9 @@
   /* --color-bg-light: #5c5e61; */
 }
 
+/* General Styles */
 .App {
-  height: 100vh;
+  min-height: 100vh;
   background: var(--color-bg); /* fallback for old browsers */
   /* Chrome 10-25, Safari 5.1-6 */
   background: -webkit-linear-gradient(to top, var(--color-bg-light), var(--color-bg));
@@ -18,20 +19,44 @@
 .content {
   width: 75%;
   margin: auto;
-  padding: 3rem 0;
+  padding: 1rem 0;
 }
 
+.full-width {
+  width: 100%;
+}
+
+/* Overrides */
 .modal,
 .input {
   width: 100%;
 }
 
+a:any-link,
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-gray-light);
+}
+
+/* Task */
 .completed-task {
   text-decoration: line-through;
   color: gray;
   font-weight: 400;
 }
 
+/* Timer */
+.timer-display {
+  max-width: 20rem;
+  margin: 2rem auto;
+}
+
+/* Media Queries */
 @media screen and (max-width: 800px) {
   .content {
     width: 85%;
