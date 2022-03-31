@@ -27,9 +27,14 @@ export default function Pomodoro() {
 
   const calcPercentage = () => (secondsLeft / (task.duration * 60)) * 100;
 
+  const setDocumentTitle = (content) => {
+    document.title = content ? `${content} • Reactodoro` : 'Reactodoro';
+  };
+
   const resetClickHandler = () => {
     setSecondsLeft(task.duration * 60);
     setIsActive(false);
+    setDocumentTitle();
   };
 
   useEffect(() => {
@@ -38,12 +43,12 @@ export default function Pomodoro() {
         setSecondsLeft((secondsLeft) => secondsLeft - 1);
       }, 1000);
 
-      document.title = `${formatTimeLeft(secondsLeft)} 🧑‍💻 - Reactodoro`;
+      setDocumentTitle(`${formatTimeLeft(secondsLeft)} 🧑‍💻`);
 
       if (secondsLeft === 0) {
         clearInterval(interval);
         dispatchTasks({ type: 'COMPLETE_TASK', payload: task });
-        document.title = `Task Complete 🎉 - Reactodoro`;
+        setDocumentTitle('Task Complete 🎉');
       }
       return () => clearInterval(interval);
     }
