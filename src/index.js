@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
+import { TasksProvider } from './context/tasks-context';
+
+import './styles/index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TasksProvider>
+      <Router>
+        <App />
+      </Router>
+    </TasksProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,45 @@
+@import url(./_reset.css);
+
+:root {
+  --color-bg: #232526;
+  --color-bg-light: #414345;
+  /* --color-bg-light: #5c5e61; */
+}
+
+.App {
+  height: 100vh;
+  background: var(--color-bg); /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to top, var(--color-bg-light), var(--color-bg));
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top, var(--color-bg-light), var(--color-bg));
+}
+
+.content {
+  width: 75%;
+  margin: auto;
+  padding: 3rem 0;
+}
+
+.modal,
+.input {
+  width: 100%;
+}
+
+.completed-task {
+  text-decoration: line-through;
+  color: gray;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content {
+    width: 100%;
+  }
+}
