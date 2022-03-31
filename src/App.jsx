@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router';
-import { Home, Pomodoro } from './views';
+import { Home, Page404, Pomodoro } from './views';
 
 function App() {
   return (
@@ -7,6 +7,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pomodoro/:id" element={<Pomodoro />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </div>
   );
