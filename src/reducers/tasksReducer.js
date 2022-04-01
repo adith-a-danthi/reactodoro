@@ -4,6 +4,7 @@ const actionTypes = {
   ADD_TASK: 'ADD_TASK',
   REMOVE_TASK: 'REMOVE_TASK',
   UPDATE_TASK: 'UPDATE_TASK',
+  COMPLETE_TASK: 'COMPLETE_TASK',
 };
 
 const tasksReducer = (state, { type, payload }) => {
@@ -14,6 +15,8 @@ const tasksReducer = (state, { type, payload }) => {
       return state.filter((task) => task.id !== payload.id);
     case actionTypes.UPDATE_TASK:
       return state.map((task) => (task.id === payload.id ? payload : task));
+    case actionTypes.COMPLETE_TASK:
+      return state.map((task) => (task.id === payload.id ? { ...task, isCompleted: true } : task));
     default:
       return state;
   }

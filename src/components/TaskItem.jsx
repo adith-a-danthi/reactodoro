@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useTasks } from '../context/tasks-context';
 import { actionTypes } from '../reducers/tasksReducer';
 
@@ -6,9 +7,11 @@ export default function TaskItem({ task, showEditModal }) {
 
   return (
     <li className="list-group-item justify-space-between">
-      <p className={`text-md font-weight-bold ${task.isCompleted ? 'completed-task' : ''}`}>
-        {task.title}
-      </p>
+      <Link key={task.id} to={`/pomodoro/${task.id}`} className="flex-grow">
+        <p className={`text-md font-weight-bold ${task.isCompleted ? 'completed-task' : ''}`}>
+          {task.title}
+        </p>
+      </Link>
       <div className="flex gap-1">
         <button className="btn fab small-fab btn-secondary" onClick={() => showEditModal(task)}>
           <i className="fas fa-edit"></i>
