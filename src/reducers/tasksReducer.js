@@ -5,6 +5,7 @@ const actionTypes = {
   REMOVE_TASK: 'REMOVE_TASK',
   UPDATE_TASK: 'UPDATE_TASK',
   COMPLETE_TASK: 'COMPLETE_TASK',
+  SET_TASKS: 'SET_TASKS',
 };
 
 const tasksReducer = (state, { type, payload }) => {
@@ -17,6 +18,8 @@ const tasksReducer = (state, { type, payload }) => {
       return state.map((task) => (task.id === payload.id ? payload : task));
     case actionTypes.COMPLETE_TASK:
       return state.map((task) => (task.id === payload.id ? { ...task, isCompleted: true } : task));
+    case actionTypes.SET_TASKS:
+      return payload;
     default:
       return state;
   }
