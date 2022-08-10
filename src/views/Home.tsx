@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Navbar, TaskItem, Modal } from '../components';
 import { useTasks } from '../context/tasks-context';
+import { Task } from '../types';
 
 export default function Home() {
   const modalInitialState = {
     showModal: false,
-    modelTask: {},
+    modelTask: {} as Task,
     editModal: false,
   };
   // Hooks
@@ -15,8 +16,9 @@ export default function Home() {
   const { showModal, modelTask, editModal } = modelState;
 
   // Handlers
-  const setShowModal = (value) => setModelState((state) => ({ ...state, showModal: value }));
-  const showEditModal = (task) =>
+  const setShowModal = (value: boolean) =>
+    setModelState((state) => ({ ...state, showModal: value }));
+  const showEditModal = (task: Task) =>
     setModelState({ showModal: true, modelTask: task, editModal: true });
 
   return (
@@ -39,7 +41,7 @@ export default function Home() {
 
           {/* Task List */}
           <ul className="list-group list-separators ma-4 mt-6">
-            {tasks.map((task) => (
+            {tasks.map((task: Task) => (
               <TaskItem key={task.id} task={task} showEditModal={showEditModal} />
             ))}
           </ul>
