@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTasks } from '../context/tasks-context';
-import { actionTypes } from '../reducers/tasksReducer';
+import { TaskActions } from '../reducers/tasksReducer';
 import { v4 as uuidV4 } from 'uuid';
 import { Task } from '../types';
 
@@ -26,8 +26,8 @@ export default function Modal({ setShowModal, task, editModal }: ModalProps) {
 
   const submitHandler = () => {
     editModal
-      ? dispatchTasks({ type: actionTypes.UPDATE_TASK, payload: newTask })
-      : dispatchTasks({ type: actionTypes.ADD_TASK, payload: { ...newTask, id: uuidV4() } });
+      ? dispatchTasks({ type: TaskActions.UPDATE_TASK, payload: newTask })
+      : dispatchTasks({ type: TaskActions.ADD_TASK, payload: { ...newTask, id: uuidV4() } });
     setShowModal(false);
   };
 

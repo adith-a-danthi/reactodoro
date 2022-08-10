@@ -5,12 +5,20 @@ import { useTasks } from '../context/tasks-context';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Task } from '../types';
+import { TaskActions } from '../reducers/tasksReducer';
 
 export default function Pomodoro() {
   const { tasks, dispatchTasks } = useTasks();
   const { id } = useParams();
 
-  const task = tasks.find((task: Task) => task.id === id);
+  const defaultTask: Task = {
+    id: '',
+    title: '',
+    isCompleted: false,
+    duration: 0,
+    description: '',
+  };
+  const task = tasks.find((task: Task) => task.id === id) ?? defaultTask;
 
   const [secondsLeft, setSecondsLeft] = useState(task.duration * 60);
   const [isActive, setIsActive] = useState(false);
@@ -48,7 +56,7 @@ export default function Pomodoro() {
 
       if (secondsLeft === 0) {
         clearInterval(interval);
-        dispatchTasks({ type: 'COMPLETE_TASK', payload: task });
+        dispatchTasks({ type: TaskActions.COMPLETE_TASK, payload: task });
         setDocumentTitle('Task Complete 🎉');
       }
       return () => clearInterval(interval);
