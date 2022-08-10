@@ -6,7 +6,11 @@ import { Task } from '../types';
 export default function Home() {
   const modalInitialState = {
     showModal: false,
-    modelTask: {} as Task,
+    modelTask: {
+      title: '',
+      duration: 15,
+      description: '',
+    } as Task,
     editModal: false,
   };
   // Hooks
