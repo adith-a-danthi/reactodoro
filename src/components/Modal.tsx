@@ -1,32 +1,33 @@
 import { useState } from 'react';
 import { useTasks } from '../context/tasks-context';
-import { actionTypes } from '../reducers/tasksReducer';
+import { TaskActions } from '../reducers/tasksReducer';
 import { v4 as uuidV4 } from 'uuid';
+import { Task } from '../types';
 
-export default function Modal({ setShowModal, task = {}, editModal }) {
-  const [newTask, setNewTask] = useState({
-    title: '',
-    description: '',
-    duration: 15,
-    isCompleted: false,
-    ...task,
-  });
+type ModalProps = {
+  setShowModal: (showModal: boolean) => void;
+  task: Task;
+  editModal: boolean;
+};
+
+export default function Modal({ setShowModal, task, editModal }: ModalProps) {
+  const [newTask, setNewTask] = useState(task);
   const { dispatchTasks } = useTasks();
 
-  const formHandler = (e) => {
+  const formHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewTask({ ...newTask, [name]: value });
   };
 
-  const durationHandler = (type) => {
+  const durationHandler = (type: string) => {
     const newValue = newTask.duration + (type === 'add' ? 1 : -1) || 1;
     setNewTask({ ...newTask, duration: newValue });
   };
 
   const submitHandler = () => {
     editModal
-      ? dispatchTasks({ type: actionTypes.UPDATE_TASK, payload: newTask })
-      : dispatchTasks({ type: actionTypes.ADD_TASK, payload: { ...newTask, id: uuidV4() } });
+      ? dispatchTasks({ type: TaskActions.UPDATE_TASK, payload: newTask })
+      : dispatchTasks({ type: TaskActions.ADD_TASK, payload: { ...newTask, id: uuidV4() } });
     setShowModal(false);
   };
 
@@ -58,7 +59,6 @@ export default function Modal({ setShowModal, task = {}, editModal }) {
           <label>
             <p className="text-sm font-weight-bold">Description</p>
             <textarea
-              type="text"
               className="input"
               name="description"
               value={newTask.description}

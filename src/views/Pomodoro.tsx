@@ -4,12 +4,21 @@ import { Navbar } from '../components';
 import { useTasks } from '../context/tasks-context';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Task } from '../types';
+import { TaskActions } from '../reducers/tasksReducer';
 
 export default function Pomodoro() {
   const { tasks, dispatchTasks } = useTasks();
   const { id } = useParams();
 
-  const task = tasks.find((task) => task.id === id);
+  const defaultTask: Task = {
+    id: '',
+    title: '',
+    isCompleted: false,
+    duration: 0,
+    description: '',
+  };
+  const task = tasks.find((task: Task) => task.id === id) ?? defaultTask;
 
   const [secondsLeft, setSecondsLeft] = useState(task.duration * 60);
   const [isActive, setIsActive] = useState(false);
@@ -19,7 +28,7 @@ export default function Pomodoro() {
    * @param {Number} seconds
    * @returns {String} formatted time in the format of mm:ss
    */
-  const formatTimeLeft = (seconds) => {
+  const formatTimeLeft = (seconds: number): string => {
     const formatMinutes = Math.floor(seconds / 60);
     const formatSeconds = seconds % 60;
     return `${formatMinutes}m : ${formatSeconds > 9 ? formatSeconds : '0' + formatSeconds}s`;
@@ -27,7 +36,7 @@ export default function Pomodoro() {
 
   const calcPercentage = () => (secondsLeft / (task.duration * 60)) * 100;
 
-  const setDocumentTitle = (content) => {
+  const setDocumentTitle = (content?: string) => {
     document.title = content ? `${content} • Reactodoro` : 'Reactodoro';
   };
 
@@ -47,7 +56,7 @@ export default function Pomodoro() {
 
       if (secondsLeft === 0) {
         clearInterval(interval);
-        dispatchTasks({ type: 'COMPLETE_TASK', payload: task });
+        dispatchTasks({ type: TaskActions.COMPLETE_TASK, payload: task });
         setDocumentTitle('Task Complete 🎉');
       }
       return () => clearInterval(interval);

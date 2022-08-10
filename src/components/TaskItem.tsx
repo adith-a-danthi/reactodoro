@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useTasks } from '../context/tasks-context';
-import { actionTypes } from '../reducers/tasksReducer';
+import { TaskActions } from '../reducers/tasksReducer';
+import { Task } from '../types';
 
-export default function TaskItem({ task, showEditModal }) {
+type TaskItemProps = {
+  task: Task;
+  showEditModal: (task: Task) => void;
+};
+
+export default function TaskItem({ task, showEditModal }: TaskItemProps) {
   const { dispatchTasks } = useTasks();
 
   return (
@@ -18,7 +24,7 @@ export default function TaskItem({ task, showEditModal }) {
         </button>
         <button
           className="btn fab small-fab btn-secondary"
-          onClick={() => dispatchTasks({ type: actionTypes.REMOVE_TASK, payload: task })}>
+          onClick={() => dispatchTasks({ type: TaskActions.REMOVE_TASK, payload: task })}>
           <i className="fas fa-trash"></i>
         </button>
       </div>
