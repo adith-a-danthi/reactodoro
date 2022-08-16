@@ -7,4 +7,23 @@ You can add edit and delete Pomodoro tasks.
 - [React.js](https://reactjs.org/)
 - [React Router](https://reactrouter.com/)
 - [tidle-ui](https://tidle-ui.netlify.com)
-- CSS
+- [TypeScript](https://www.typescriptlang.org/)
+- [jest](https://jestjs.io/)
+
+## Setup
+
+### Install dependencies
+```bash
+npm install
+```
+
+### Development
+```bash
+npm start
+```
+
+### Production
+```bash
+npm run build
+```
+
